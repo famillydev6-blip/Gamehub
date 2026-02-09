@@ -3,29 +3,43 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider, useAuth } from "@/hooks/useAuth";
+import { Navbar } from "@/components/Navbar";
 import NotFound from "@/pages/not-found";
+import Login from "@/pages/Login";
 import Home from "@/pages/Home";
 import BudgetList from "@/pages/BudgetList";
 import BudgetDetail from "@/pages/BudgetDetail";
 
-function Router() {
+function ProtectedRouter() {
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Route path="*" component={Login} />;
+  }
+
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/budgets" component={BudgetList} />
-      <Route path="/budgets/:id" component={BudgetDetail} />
-      <Route component={NotFound} />
-    </Switch>
+    <div>
+      <Navbar />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/budgets" component={BudgetList} />
+        <Route path="/budgets/:id" component={BudgetDetail} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   );
 }
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <ProtectedRouter />
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

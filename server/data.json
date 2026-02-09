@@ -1,0 +1,52 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Maman",
+      "password": "MamanPass!2026"
+    },
+    {
+      "id": 2,
+      "name": "Papa",
+      "password": "PapaPass!2026"
+    },
+    {
+      "id": 3,
+      "name": "devloppeur (ryan)",
+      "password": "RyanDev!2026"
+    }
+  ],
+  "currentProfileId": 3,
+  "budgets": [
+    {
+      "id": 6,
+      "name": "test",
+      "totalAmount": 50,
+      "monthlyAmount": 5,
+      "startDate": "2026-02-09",
+      "createdAt": "2026-02-09T18:06:49.085Z"
+    }
+  ],
+  "budgetPayments": [
+    {
+      "id": 18,
+      "budgetId": 6,
+      "monthIndex": 0,
+      "isPaid": false
+    },
+    {
+      "id": 19,
+      "budgetId": 6,
+      "monthIndex": 1,
+      "isPaid": false
+    },
+    {
+      "id": 20,
+      "budgetId": 6,
+      "monthIndex": 2,
+      "isPaid": false
+    }
+  ],
+  "nextBudgetId": 7,
+  "nextPaymentId": 21
+}

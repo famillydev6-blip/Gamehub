@@ -9,6 +9,49 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
 
+  // Get available profiles
+  app.get("/api/auth/profiles", async (req, res) => {
+    const profiles = await storage.getProfiles();
+    res.json(profiles);
+  });
+
+  // Login with profile and password
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { profileId, password } = z.object({
+        profileId: z.number(),
+        password: z.string(),
+      }).parse(req.body);
+
+      const isValid = await storage.verifyProfile(profileId, password);
+      if (!isValid) {
+        return res.status(401).json({ message: 'Mot de passe incorrect' });
+      }
+
+      await storage.setCurrentProfileId(profileId);
+      res.json({ success: true, profileId });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+        });
+      }
+      res.status(500).json({ message: 'Erreur serveur' });
+    }
+  });
+
+  // Logout
+  app.post("/api/auth/logout", async (req, res) => {
+    await storage.clearProfile();
+    res.json({ success: true });
+  });
+
+  // Get current profile
+  app.get("/api/auth/current", async (req, res) => {
+    const currentProfileId = await storage.getCurrentProfileId();
+    res.json({ profileId: currentProfileId });
+  });
+
   // List budgets
   app.get(api.budgets.list.path, async (req, res) => {
     const budgets = await storage.getBudgets();
