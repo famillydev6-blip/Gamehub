@@ -68,15 +68,17 @@ export function CreateBudgetDialog({ children }: { children?: React.ReactNode })
   const monthly = form.watch("monthlyAmount");
   const monthsCount = total && monthly && monthly > 0 ? Math.ceil(total / monthly) : 0;
 
+  const triggerButton = children || (
+    <Button size="lg" className="shadow-lg shadow-primary/20 text-lg font-medium px-8">
+      <Plus className="mr-2 h-5 w-5" />
+      Créer un tableau
+    </Button>
+  );
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {children || (
-          <Button size="lg" className="shadow-lg shadow-primary/20 text-lg font-medium px-8">
-            <Plus className="mr-2 h-5 w-5" />
-            Créer un tableau
-          </Button>
-        )}
+        {triggerButton}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] border-0 shadow-2xl rounded-2xl p-0 overflow-hidden bg-card/95 backdrop-blur-xl">
         <div className="bg-primary/5 p-8 pb-6 border-b border-border/50">

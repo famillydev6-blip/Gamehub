@@ -97,8 +97,9 @@
 
 /* Stabilize Radix UI animations without breaking rendering */
 /* Allow data-[state] animations to work but prevent race conditions */
-[data-state="closed"] {
-  @apply transition-opacity duration-150;
+/* Only disable pointer events for dialog content/overlay when closed, not the trigger */
+[role="dialog"][data-state="closed"] {
+  @apply transition-opacity duration-150 pointer-events-none;
 }
 
 [data-state="open"] {
@@ -108,11 +109,6 @@
 /* Ensure content is visible when open */
 [data-state="open"] {
   @apply opacity-100;
-}
-
-/* Hide content when closed */
-[data-state="closed"] {
-  @apply pointer-events-none;
 }
 
 
