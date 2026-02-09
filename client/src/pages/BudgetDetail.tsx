@@ -2,7 +2,7 @@ import { Link, useRoute } from "wouter";
 import { useBudget, useDeleteBudget, useTogglePayment } from "@/hooks/use-budgets";
 import { format, addMonths } from "date-fns";
 import { fr } from "date-fns/locale";
-import { ArrowLeft, Trash2, Calendar, CheckCircle2, Circle } from "lucide-react";
+import { ArrowLeft, Trash2, Calendar, CheckCircle2, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
