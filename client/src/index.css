@@ -95,44 +95,24 @@
   @apply bg-border rounded-full hover:bg-muted-foreground/30 transition-colors;
 }
 
-/* Fix Radix UI animation-related removeChild errors */
-/* Disable problematic data-[state] animations and use simpler CSS transitions instead */
-[data-state="open"],
+/* Stabilize Radix UI animations without breaking rendering */
+/* Allow data-[state] animations to work but prevent race conditions */
 [data-state="closed"] {
-  /* Override Radix UI animate-in/animate-out classes */
-  animation: none !important;
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-}
-
-/* Handle opacity and visibility for state changes */
-[data-state="closed"] {
-  opacity: 0;
-  pointer-events: none;
+  @apply transition-opacity duration-150;
 }
 
 [data-state="open"] {
-  opacity: 1;
-  pointer-events: auto;
+  @apply transition-opacity duration-150;
 }
 
-/* Prevent transform flickers */
-[data-state="open"][data-side="bottom"] {
-  transform: translateY(4px);
+/* Ensure content is visible when open */
+[data-state="open"] {
+  @apply opacity-100;
 }
 
-[data-state="open"][data-side="top"] {
-  transform: translateY(-4px);
-}
-
-[data-state="open"][data-side="left"] {
-  transform: translateX(-4px);
-}
-
-[data-state="open"][data-side="right"] {
-  transform: translateX(4px);
-}
-
+/* Hide content when closed */
 [data-state="closed"] {
-  transform: scale(0.95);
+  @apply pointer-events-none;
 }
+
 
