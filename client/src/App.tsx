@@ -12,12 +12,7 @@ import BudgetList from "@/pages/BudgetList";
 import BudgetDetail from "@/pages/BudgetDetail";
 
 function ProtectedRouter() {
-  const { isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <Route path="*" component={Login} />;
-  }
-
+  // Authentication check disabled - always show authenticated routes
   return (
     <div>
       <Navbar />

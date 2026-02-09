@@ -10,37 +10,21 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [profileId, setProfileId] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  // AUTHENTIFICATION DESACTIVEE TEMPORAIREMENT
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [profileId, setProfileId] = useState<number | null>(1);
+  const [loading, setLoading] = useState(false);
 
   const checkAuth = async () => {
-    try {
-      const response = await fetch("/api/auth/current");
-      const data = await response.json();
-      if (data.profileId) {
-        setIsAuthenticated(true);
-        setProfileId(data.profileId);
-      } else {
-        setIsAuthenticated(false);
-        setProfileId(null);
-      }
-    } catch {
-      setIsAuthenticated(false);
-      setProfileId(null);
-    } finally {
-      setLoading(false);
-    }
+    // Authentication check disabled
+    setIsAuthenticated(true);
+    setProfileId(1);
+    setLoading(false);
   };
 
   const logout = async () => {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-      setIsAuthenticated(false);
-      setProfileId(null);
-    } catch {
-      console.error("Logout error");
-    }
+    // Logout disabled
+    console.log("Logout disabled - authentication is deactivated");
   };
 
   useEffect(() => {

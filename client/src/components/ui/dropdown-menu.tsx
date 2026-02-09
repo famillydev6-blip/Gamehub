@@ -60,19 +60,17 @@ const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
-  <DropdownMenuPrimitive.Portal>
-    <DropdownMenuPrimitive.Content
-      ref={ref}
-      sideOffset={sideOffset}
-      className={cn(
-        "z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md",
-        "transition-opacity duration-150",
-        "origin-[--radix-dropdown-menu-content-transform-origin]",
-        className
-      )}
-      {...props}
-    />
-  </DropdownMenuPrimitive.Portal>
+  <DropdownMenuPrimitive.Content
+    ref={ref}
+    sideOffset={sideOffset}
+    className={cn(
+      "z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md",
+      "transition-opacity duration-150",
+      "origin-[--radix-dropdown-menu-content-transform-origin]",
+      className
+    )}
+    {...props}
+  />
 ))
 DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName
 

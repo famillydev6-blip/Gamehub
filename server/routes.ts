@@ -48,8 +48,8 @@ export async function registerRoutes(
 
   // Get current profile
   app.get("/api/auth/current", async (req, res) => {
-    const currentProfileId = await storage.getCurrentProfileId();
-    res.json({ profileId: currentProfileId });
+    // AUTHENTIFICATION DESACTIVEE - Retourne toujours le profil par défaut
+    res.json({ profileId: 1 });
   });
 
   // List budgets

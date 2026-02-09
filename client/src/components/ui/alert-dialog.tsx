@@ -30,7 +30,7 @@ const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
 >(({ className, ...props }, ref) => (
-  <AlertDialogPortal>
+  <>
     <AlertDialogOverlay />
     <AlertDialogPrimitive.Content
       ref={ref}
@@ -42,7 +42,7 @@ const AlertDialogContent = React.forwardRef<
       )}
       {...props}
     />
-  </AlertDialogPortal>
+  </>
 ))
 AlertDialogContent.displayName = AlertDialogPrimitive.Content.displayName
 

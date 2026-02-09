@@ -58,18 +58,16 @@ const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
 >(({ className, ...props }, ref) => (
-  <ContextMenuPrimitive.Portal>
-    <ContextMenuPrimitive.Content
-      ref={ref}
-      className={cn(
-        "z-50 max-h-[--radix-context-menu-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80",
-        "transition-opacity duration-150",
-        "origin-[--radix-context-menu-content-transform-origin]",
-        className
-      )}
-      {...props}
-    />
-  </ContextMenuPrimitive.Portal>
+  <ContextMenuPrimitive.Content
+    ref={ref}
+    className={cn(
+      "z-50 max-h-[--radix-context-menu-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80",
+      "transition-opacity duration-150",
+      "origin-[--radix-context-menu-content-transform-origin]",
+      className
+    )}
+    {...props}
+  />
 ))
 ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName
 
