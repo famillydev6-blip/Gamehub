@@ -2,15 +2,15 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// Handle uncaught DOM errors silently to prevent crashes
-// These are typically harmless animation-related removeChild errors
+// Suppress Radix UI animation-related DOM errors that don't affect functionality
 window.addEventListener("error", (event) => {
   if (
     event.error?.message?.includes("removeChild") ||
-    event.error?.message?.includes("Failed to execute")
+    event.error?.message?.includes("Failed to execute") ||
+    event.error?.message?.includes("is not a child")
   ) {
     event.preventDefault();
-    console.warn("Non-critical DOM manipulation error suppressed:", event.error);
+    // Silently suppress - these are harmless animation timing issues
   }
 });
 

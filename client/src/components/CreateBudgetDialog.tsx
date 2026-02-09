@@ -57,16 +57,8 @@ export function CreateBudgetDialog({ children }: { children?: React.ReactNode })
   const onSubmit = (data: FormValues) => {
     createBudget.mutate(data, {
       onSuccess: () => {
-        // Add small delay to allow animations to complete before closing
-        const timeoutId = setTimeout(() => {
-          setOpen(false);
-          form.reset();
-        }, 300);
-        
-        return () => clearTimeout(timeoutId);
-      },
-      onError: () => {
-        // Do nothing special on error, let the form stay open
+        setOpen(false);
+        form.reset();
       },
     });
   };

@@ -94,3 +94,45 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-border rounded-full hover:bg-muted-foreground/30 transition-colors;
 }
+
+/* Fix Radix UI animation-related removeChild errors */
+/* Disable problematic data-[state] animations and use simpler CSS transitions instead */
+[data-state="open"],
+[data-state="closed"] {
+  /* Override Radix UI animate-in/animate-out classes */
+  animation: none !important;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+/* Handle opacity and visibility for state changes */
+[data-state="closed"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-state="open"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Prevent transform flickers */
+[data-state="open"][data-side="bottom"] {
+  transform: translateY(4px);
+}
+
+[data-state="open"][data-side="top"] {
+  transform: translateY(-4px);
+}
+
+[data-state="open"][data-side="left"] {
+  transform: translateX(-4px);
+}
+
+[data-state="open"][data-side="right"] {
+  transform: translateX(4px);
+}
+
+[data-state="closed"] {
+  transform: scale(0.95);
+}
+
